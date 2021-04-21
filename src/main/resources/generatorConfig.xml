@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-	<context id="context1">
+	<properties resource="application.properties" />
+	<context id="MySqlContext">
 		<commentGenerator>
 			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
 			<property name="suppressAllComments" value="true" />
 		</commentGenerator>
 		<!-- 数据库链接URL、用户名、密码 -->
 		<jdbcConnection
-			connectionURL="jdbc:mysql://localhost:3306/mysql_test?serverTimezone=GMT%2B8"
-			driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+			connectionURL="${spring.datasource.url}"
+			driverClass="${spring.datasource.driver-class-name}"
+			password="${spring.datasource.password}"
+			userId="${spring.datasource.username}" />
 		<!-- 生成模型的包名和位置 -->
 		<javaModelGenerator
 			targetPackage="com.kxf.springdemo.entity"
