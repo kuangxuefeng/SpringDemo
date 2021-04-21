@@ -1,26 +1,26 @@
 package com.kxf.springdemo.controller;
 
-import java.util.concurrent.atomic.AtomicLong;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kxf.springdemo.model.Test;
+import com.kxf.springdemo.entity.SpringTableBean;
+import com.kxf.springdemo.service.SpringTableService;
 
 @RestController
 public class TestController {
-	private static final String template = "Hello, %s!";
-    private final AtomicLong counter = new AtomicLong();
+	@Autowired
+    private SpringTableService springTableService;
 
-    @RequestMapping("/test")
-    public Test dealTest(@RequestParam(value="name", defaultValue="World") String name) {
-        return new Test(counter.incrementAndGet(),
-                            String.format(template, name));
-    }
-    @RequestMapping("/test1")
-    public Test dealTest1(@RequestParam(value="name", defaultValue="World") String name) {
-        return new Test(counter.incrementAndGet(),
-                            String.format(template, name));
+	/**
+	 * 查询   http://localhost:8080/select?id=2
+	 * @param id
+	 * @return
+	 */
+    @RequestMapping("/select")
+    public String select(@RequestParam(value="id", defaultValue="1") int id) {
+    	SpringTableBean sb = springTableService.select(id);
+        return sb.getName();
     }
 }
