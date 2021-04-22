@@ -14,13 +14,24 @@ public class TestController {
     private SpringTableService springTableService;
 
 	/**
-	 * 查询   http://localhost:8080/select?id=2
+	 * 查询名称   http://localhost:8080/selectNameById?id=2
 	 * @param id
 	 * @return
 	 */
-    @RequestMapping("/select")
-    public String select(@RequestParam(value="id", defaultValue="1") int id) {
+    @RequestMapping("/selectNameById")
+    public String selectNameById(@RequestParam(value="id", defaultValue="1") int id) {
     	SpringTableBean sb = springTableService.select(id);
         return sb.getName();
+    }
+    
+    /**
+	 * 查询对象   http://localhost:8080/selectById?id=2
+	 * @param id
+	 * @return
+	 */
+    @RequestMapping("/selectById")
+    public SpringTableBean selectById(@RequestParam(value="id", defaultValue="1") int id) {
+    	SpringTableBean sb = springTableService.select(id);
+        return sb;
     }
 }
