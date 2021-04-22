@@ -26,12 +26,28 @@ public class TestController {
     
     /**
 	 * 查询对象   http://localhost:8080/selectById?id=2
-	 * @param id
-	 * @return
 	 */
     @RequestMapping("/selectById")
     public SpringTableBean selectById(@RequestParam(value="id", defaultValue="1") int id) {
     	SpringTableBean sb = springTableService.select(id);
         return sb;
+    }
+    
+    /**
+	 * 增加对象   http://localhost:8080/addUser?name=tom
+	 */
+    @RequestMapping("/addUser")
+    public String addUser(@RequestParam(value="name", defaultValue="") String name, @RequestParam(value="info", defaultValue="") String info) {
+    	String re = "fail";
+    	if (name!=null && name.length()>0) {
+    		SpringTableBean sBean = new SpringTableBean();
+    		sBean.setName(name);
+    		sBean.setInfo(info);
+    		int i = springTableService.insert(sBean);
+    		if (i>0) {
+    			re = "success";
+			}
+		}
+        return re;
     }
 }

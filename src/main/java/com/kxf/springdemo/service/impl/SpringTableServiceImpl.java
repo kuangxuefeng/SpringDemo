@@ -21,5 +21,12 @@ public class SpringTableServiceImpl implements SpringTableService {
 		Optional<SpringTableBean> stbs = mapper.selectByPrimaryKey(id);
 		return stbs.orElse(null);
 	}
+	
+	@Override
+	public int insert(SpringTableBean bean) {
+		// TODO Auto-generated method stub
+		int re = mapper.insert(bean);
+		return re;
+	}
 
 }
