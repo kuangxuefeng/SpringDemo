@@ -54,6 +54,7 @@ public class TestController {
 	@RequestMapping(value = "/addUser", method=RequestMethod.GET)
     public String addUser(@ApiParam(value="用户名称", defaultValue="") @RequestParam(value="name", defaultValue="") String name, @ApiParam(value="用户备注", defaultValue="") @RequestParam(value="info", defaultValue="") String info) {
 		logger.info("addUser===>>>");
+		logger.error("addUser===>>>");
     	String re = "fail";
     	if (name!=null && name.length()>0) {
     		SpringTableBean sBean = new SpringTableBean();
