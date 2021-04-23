@@ -15,7 +15,7 @@ import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("/springTable")
-@Api(tags = "springTable读写")
+@Api(tags = {"springTable读写"}, description = "/springTable")
 public class TestController {
 	@Autowired
     private SpringTableService springTableService;
