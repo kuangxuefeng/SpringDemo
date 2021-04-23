@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.kxf</groupId>
 	<artifactId>SpringDemo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-alpha</version>
 	<name>SpringDemo</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
