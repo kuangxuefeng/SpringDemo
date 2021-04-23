@@ -1,2 +1,3 @@
 # SpringDemo
 SpringDemo
+mybatis generator
