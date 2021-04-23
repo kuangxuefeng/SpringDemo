@@ -9,12 +9,13 @@ import com.kxf.springdemo.entity.SpringTableBean;
 import com.kxf.springdemo.service.SpringTableService;
 
 @RestController
+@RequestMapping("/springTable")
 public class TestController {
 	@Autowired
     private SpringTableService springTableService;
 
 	/**
-	 * 查询名称   http://localhost:8080/selectNameById?id=2
+	 * 查询名称   http://localhost:8080/springTable/selectNameById?id=2
 	 * @param id
 	 * @return
 	 */
@@ -25,7 +26,7 @@ public class TestController {
     }
     
     /**
-	 * 查询对象   http://localhost:8080/selectById?id=2
+	 * 查询对象   http://localhost:8080/springTable/selectById?id=2
 	 */
     @RequestMapping("/selectById")
     public SpringTableBean selectById(@RequestParam(value="id", defaultValue="1") int id) {
@@ -34,7 +35,7 @@ public class TestController {
     }
     
     /**
-	 * 增加对象   http://localhost:8080/addUser?name=tom
+	 * 增加对象   http://localhost:8080/springTable/addUser?name=tom
 	 */
     @RequestMapping("/addUser")
     public String addUser(@RequestParam(value="name", defaultValue="") String name, @RequestParam(value="info", defaultValue="") String info) {
