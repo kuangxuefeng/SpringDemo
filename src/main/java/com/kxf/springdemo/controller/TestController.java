@@ -1,11 +1,14 @@
 package com.kxf.springdemo.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kxf.springdemo.SpringDemoApplication;
 import com.kxf.springdemo.entity.SpringTableBean;
 import com.kxf.springdemo.service.SpringTableService;
 
@@ -19,6 +22,8 @@ import io.swagger.annotations.ApiParam;
 public class TestController {
 	@Autowired
     private SpringTableService springTableService;
+	
+	Logger logger=LoggerFactory.getLogger(TestController.class);
 
 	/**
 	 * 查询名称   http://localhost:8080/springTable/selectNameById?id=2
@@ -48,6 +53,7 @@ public class TestController {
 	@ApiOperation(value = "增加对象", notes = "增加对象")
 	@RequestMapping(value = "/addUser", method=RequestMethod.GET)
     public String addUser(@ApiParam(value="用户名称", defaultValue="") @RequestParam(value="name", defaultValue="") String name, @ApiParam(value="用户备注", defaultValue="") @RequestParam(value="info", defaultValue="") String info) {
+		logger.info("addUser===>>>");
     	String re = "fail";
     	if (name!=null && name.length()>0) {
     		SpringTableBean sBean = new SpringTableBean();
