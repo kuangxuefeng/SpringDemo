@@ -48,10 +48,23 @@ public class UserController {
 			//生成cookie
 	        String token = UUID.randomUUID().toString().replace("-", "");
 	        tokenUtil.addCookie(response, token, ub);
-//	        tokenUtil.setToken(token, ub);
+	        tokenUtil.setToken(token, ub);
 			return Result.success(token);
 		}
         return Result.error(CodeMsg.USERNAME_NOT_EXIST);
+    }
+	
+	/**
+	 * 当前用户
+	 */
+	@ApiOperation(value = "当前用户", notes = "当前用户")
+    @RequestMapping(value = "/current", method=RequestMethod.GET)
+    public Result<UserBean> current(@ApiParam(value="token", defaultValue="") @RequestParam(value="token", defaultValue="") String token) {
+		UserBean ub = tokenUtil.getByToken(token);
+		if (ub!=null) {
+			return Result.success(ub);
+		}
+        return Result.error(CodeMsg.USER_NOT_LOGIN);
     }
 
 	/**

@@ -23,7 +23,7 @@ public class TokenUtil {
      * token过期时间，2天
      * TOKEN_EXPIRE = 3600 * 24 * 2;
      */
-    public static final int TOKEN_EXPIRE = 3600 * 24 * 2;
+    public static final int TOKEN_EXPIRE = 30;
     
     public void addCookie(HttpServletResponse response, String token, UserBean user) {
         //将token写入cookie
