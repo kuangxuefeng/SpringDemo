@@ -62,6 +62,7 @@ public class UserController {
     @RequestMapping(value = "/current", method=RequestMethod.GET)
     public Result<UserBean> current(@ApiIgnore() UserBean ub, @ApiParam(value="token", defaultValue="") @RequestParam(value="token", defaultValue="") String token) {
 		if (ub!=null) {
+			ub.setPw(null);
 			return Result.success(ub);
 		}
         return Result.error(CodeMsg.USER_NOT_LOGIN);
