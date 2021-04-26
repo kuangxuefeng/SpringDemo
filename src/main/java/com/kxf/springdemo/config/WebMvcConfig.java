@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 
 import com.kxf.springdemo.inteceptor.AuthenticationInterceptor;
 import com.kxf.springdemo.inteceptor.CurrentUserMethodArgumentResolver;
+import com.kxf.springdemo.inteceptor.ReqIdInterceptor;
 
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurationSupport {
@@ -18,6 +19,16 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 //    @Value("${file.userfiles-path}")
 //    private String filePath;
 
+	/**
+	 * 登录校验拦截器
+	 *
+	 * @return
+	 */
+	@Bean
+	public ReqIdInterceptor reqIdInterceptor() {
+		return new ReqIdInterceptor();
+	}
+	
 	/**
 	 * 登录校验拦截器
 	 *
@@ -51,16 +62,18 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(reqIdInterceptor());
 		registry.addInterceptor(loginRequiredInterceptor()).addPathPatterns("/**").excludePathPatterns("/user/login")
-				.excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
+				.excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**", "/error");
 		super.addInterceptors(registry);
 	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-		registry.addResourceHandler("/**").addResourceLocations("classpath:/META-INF/resources/")
-				.addResourceLocations("classpath:/static/page/").addResourceLocations("classpath:/static/templates/");
+		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+//		registry.addResourceHandler("/**").addResourceLocations("classpath:/META-INF/resources/")
+//				.addResourceLocations("classpath:/static/page/").addResourceLocations("classpath:/static/templates/");
 //                .addResourceLocations("file:" + filePath);
 	}
 

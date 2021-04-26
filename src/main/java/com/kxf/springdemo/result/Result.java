@@ -4,6 +4,7 @@ public class Result<T> {
 
     private int code;
     private String msg;
+    private String reqId;
     private T data;
 
     /**
@@ -73,4 +74,12 @@ public class Result<T> {
     public void setData(T data) {
         this.data = data;
     }
+
+	public String getReqId() {
+		return reqId;
+	}
+
+	public void setReqId(String reqId) {
+		this.reqId = reqId;
+	}
 }

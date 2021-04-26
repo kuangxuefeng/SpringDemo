@@ -17,6 +17,7 @@ import com.kxf.springdemo.entity.UserBean;
 import com.kxf.springdemo.result.CodeMsg;
 import com.kxf.springdemo.result.Result;
 import com.kxf.springdemo.service.UserService;
+import com.kxf.springdemo.util.Consts;
 import com.kxf.springdemo.util.TokenUtil;
 
 import io.swagger.annotations.Api;
@@ -46,8 +47,8 @@ public class UserController {
     		@ApiParam(value="用户密码", defaultValue="") @RequestParam(value="pw", defaultValue="") String pw) {
 		UserBean ub = userService.selectByName(name);
 		if (ub!=null && StringUtils.hasText(pw) && pw.equals(ub.getPw())) {
-			//生成cookie
-	        String token = UUID.randomUUID().toString().replace("-", "");
+			//生成token
+	        String token = Consts.getUUID();
 	        tokenUtil.addCookie(response, token, ub);
 	        tokenUtil.setToken(token, ub);
 			return Result.success(token);
