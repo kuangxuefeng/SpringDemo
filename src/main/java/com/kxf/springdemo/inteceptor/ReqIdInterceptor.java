@@ -13,10 +13,12 @@ import com.kxf.springdemo.util.Consts;
 
 public class ReqIdInterceptor implements HandlerInterceptor {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	private ThreadLocal<Long> threadLocal = new ThreadLocal<>();
  
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     	logger.info("ReqIdInterceptor preHandle==>>");
+    	threadLocal.set(System.currentTimeMillis());
     	String reqId = Consts.getUUID();
     	StringBuilder sb = new StringBuilder();
     	sb.append("\n================request===============\n");
@@ -35,5 +37,12 @@ public class ReqIdInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
     	logger.info("ReqIdInterceptor afterCompletion==>>");
+    	String reqId=(String) request.getAttribute(Consts.REQ_ID);
+    	StringBuilder sb = new StringBuilder();
+    	sb.append("\n================耗时==============\n");
+    	sb.append("请求id:" + reqId + "\n");
+    	sb.append("耗时:" + (System.currentTimeMillis() - threadLocal.get()) + "ms\n");
+    	sb.append("=====================================");
+    	logger.info(sb.toString());
     }
 }
