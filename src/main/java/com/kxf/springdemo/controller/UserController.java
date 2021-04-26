@@ -59,8 +59,7 @@ public class UserController {
 	 */
 	@ApiOperation(value = "当前用户", notes = "当前用户")
     @RequestMapping(value = "/current", method=RequestMethod.GET)
-    public Result<UserBean> current(@ApiParam(value="token", defaultValue="") @RequestParam(value="token", defaultValue="") String token) {
-		UserBean ub = tokenUtil.getByToken(token);
+    public Result<UserBean> current(UserBean ub, @ApiParam(value="token", defaultValue="") @RequestParam(value="token", defaultValue="") String token) {
 		if (ub!=null) {
 			return Result.success(ub);
 		}

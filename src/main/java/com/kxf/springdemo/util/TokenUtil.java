@@ -17,17 +17,15 @@ public class TokenUtil {
 	@Autowired
     private RedisUtil redisUtil;
 	
-	public static final String COOKIE_NAME_TOKEN = "token";
-
     /**
      * token过期时间，2天
      * TOKEN_EXPIRE = 3600 * 24 * 2;
      */
-    public static final int TOKEN_EXPIRE = 30;
+    public static final int TOKEN_EXPIRE = 3000;
     
     public void addCookie(HttpServletResponse response, String token, UserBean user) {
         //将token写入cookie
-        Cookie cookie = new Cookie(COOKIE_NAME_TOKEN, token);
+        Cookie cookie = new Cookie(Consts.COOKIE_NAME_TOKEN, token);
         cookie.setMaxAge(TOKEN_EXPIRE);
         cookie.setPath("/");
         response.addCookie(cookie);
@@ -35,14 +33,14 @@ public class TokenUtil {
     
     public void setToken(String token, UserBean user) {
         //将token存入到redis
-        redisUtil.set(COOKIE_NAME_TOKEN + "::" + token, JSON.toJSONString(user), TOKEN_EXPIRE);
+        redisUtil.set(Consts.COOKIE_NAME_TOKEN + "::" + token, JSON.toJSONString(user), TOKEN_EXPIRE);
     }
     
     public UserBean getByToken(String token) {
         if (!StringUtils.hasText(token)) {
             return null;
         }
-        UserBean user = JSON.parseObject(redisUtil.get(COOKIE_NAME_TOKEN + "::" + token), UserBean.class);
+        UserBean user = JSON.parseObject(redisUtil.get(Consts.COOKIE_NAME_TOKEN + "::" + token), UserBean.class);
         //重置有效期
         if (user == null) {
             throw new GlobalException(CodeMsg.USER_NOT_LOGIN);
