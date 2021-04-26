@@ -41,6 +41,7 @@ public class ReqIdInterceptor implements HandlerInterceptor {
     	StringBuilder sb = new StringBuilder();
     	sb.append("\n================耗时==============\n");
     	sb.append("请求id:" + reqId + "\n");
+    	sb.append("请求结果:" + response.getStatus() + "\n");
     	sb.append("耗时:" + (System.currentTimeMillis() - threadLocal.get()) + "ms\n");
     	sb.append("=====================================");
     	logger.info(sb.toString());
