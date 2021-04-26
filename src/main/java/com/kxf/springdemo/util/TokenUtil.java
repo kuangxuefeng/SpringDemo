@@ -36,7 +36,7 @@ public class TokenUtil {
         redisUtil.set(Consts.COOKIE_NAME_TOKEN + "::" + token, JSON.toJSONString(user), TOKEN_EXPIRE);
     }
     
-    public UserBean getByToken(String token) {
+    public UserBean getByToken(String token) throws Exception {
         if (!StringUtils.hasText(token)) {
             return null;
         }
