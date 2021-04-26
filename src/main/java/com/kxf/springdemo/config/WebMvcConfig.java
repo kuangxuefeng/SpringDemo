@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import com.kxf.springdemo.inteceptor.AuthenticationInterceptor;
@@ -51,19 +52,19 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(loginRequiredInterceptor()).addPathPatterns("/**/**")
+		registry.addInterceptor(loginRequiredInterceptor()).addPathPatterns("/**")
 				.excludePathPatterns("/user/login");
 		super.addInterceptors(registry);
 	}
 
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/**")
-//                .addResourceLocations("classpath:/META-INF/resources/")
-//                .addResourceLocations("classpath:/static/page/")
-//                .addResourceLocations("classpath:/static/templates/")
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/META-INF/resources/")
+                .addResourceLocations("classpath:/static/page/")
+                .addResourceLocations("classpath:/static/templates/");
 //                .addResourceLocations("file:" + filePath);
-//    }
+    }
 
 //    @Override
 //    protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
