@@ -27,7 +27,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int insert(UserBean bean) {
-		int re = mapper.insert(bean);
+		int re = -1;
+		try {
+			re = mapper.insert(bean);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return re;
 	}
 
