@@ -94,7 +94,7 @@ public class UserController {
 	 * 增加对象   http://localhost:8080/user/add?name=tom
 	 */
 	@ApiOperation(value = "增加对象", notes = "增加对象")
-	@RequestMapping(value = "/add", method=RequestMethod.GET)
+	@RequestMapping(value = "/add", method=RequestMethod.POST)
     public Result<String> addUser(@ApiParam(value="用户名称", defaultValue="") @RequestParam(value="name", defaultValue="") String name, @ApiParam(value="用户备注", defaultValue="") @RequestParam(value="info", defaultValue="") String info) {
 		logger.info("addUser===>>>");
 		logger.error("addUser===>>>");
