@@ -22,6 +22,7 @@ import com.kxf.springdemo.util.TokenUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("/user")
@@ -59,7 +60,7 @@ public class UserController {
 	 */
 	@ApiOperation(value = "当前用户", notes = "当前用户")
     @RequestMapping(value = "/current", method=RequestMethod.GET)
-    public Result<UserBean> current(UserBean ub, @ApiParam(value="token", defaultValue="") @RequestParam(value="token", defaultValue="") String token) {
+    public Result<UserBean> current(@ApiIgnore() UserBean ub, @ApiParam(value="token", defaultValue="") @RequestParam(value="token", defaultValue="") String token) {
 		if (ub!=null) {
 			return Result.success(ub);
 		}
