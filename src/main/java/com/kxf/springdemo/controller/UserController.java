@@ -95,7 +95,10 @@ public class UserController {
 	 */
 	@ApiOperation(value = "增加对象", notes = "增加对象")
 	@RequestMapping(value = "/add", method=RequestMethod.POST)
-    public Result<String> addUser(@ApiParam(value="用户名称", defaultValue="") @RequestParam(value="name", defaultValue="") String name, @ApiParam(value="用户备注", defaultValue="") @RequestParam(value="info", defaultValue="") String info) {
+    public Result<String> addUser(@ApiParam(value="token", defaultValue="") @RequestParam(value="token", defaultValue="") String token,
+    		@ApiParam(value="用户名称", defaultValue="") @RequestParam(value="name", defaultValue="") String name,
+    		@ApiParam(value="用户密码", defaultValue="") @RequestParam(value="pw", defaultValue="") String pw,
+    		@ApiParam(value="用户备注", defaultValue="") @RequestParam(value="info", defaultValue="") String info) {
 		logger.info("addUser===>>>");
 		logger.error("addUser===>>>");
     	String re = "fail";
@@ -103,7 +106,7 @@ public class UserController {
     		UserBean sBean = new UserBean();
     		sBean.setName(name);
     		sBean.setInfo(info);
-    		sBean.setPw(name);
+    		sBean.setPw(pw);
     		int i = userService.insert(sBean);
     		if (i>0) {
     			re = "success";

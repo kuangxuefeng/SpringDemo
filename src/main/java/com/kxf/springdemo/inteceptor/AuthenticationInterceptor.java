@@ -25,12 +25,15 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         String token = request.getParameter(Consts.COOKIE_NAME_TOKEN);
         UserBean user = tokenUtils.getByToken(token);
         request.setAttribute(Consts.CURRENT_USER, user);
+        logger.info("AuthenticationInterceptor preHandle==>>" + user);
         return true;
     }
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    	logger.info("AuthenticationInterceptor postHandle==>>{}", modelAndView);
     }
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    	logger.info("AuthenticationInterceptor afterCompletion==>>");
     }
 }

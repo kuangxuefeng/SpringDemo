@@ -38,7 +38,7 @@ public class TokenUtil {
     
     public UserBean getByToken(String token) throws Exception {
         if (!StringUtils.hasText(token)) {
-            return null;
+        	throw new GlobalException(CodeMsg.TOKEN_INVALID);
         }
         UserBean user = JSON.parseObject(redisUtil.get(Consts.COOKIE_NAME_TOKEN + "::" + token), UserBean.class);
         //重置有效期

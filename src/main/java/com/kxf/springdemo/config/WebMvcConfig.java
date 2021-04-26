@@ -18,7 +18,6 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 //    @Value("${file.userfiles-path}")
 //    private String filePath;
 
-
 	/**
 	 * 登录校验拦截器
 	 *
@@ -52,19 +51,18 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(loginRequiredInterceptor()).addPathPatterns("/**")
-				.excludePathPatterns("/user/login");
+		registry.addInterceptor(loginRequiredInterceptor()).addPathPatterns("/**").excludePathPatterns("/user/login")
+				.excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**");
 		super.addInterceptors(registry);
 	}
 
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/**")
-                .addResourceLocations("classpath:/META-INF/resources/")
-                .addResourceLocations("classpath:/static/page/")
-                .addResourceLocations("classpath:/static/templates/");
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+		registry.addResourceHandler("/**").addResourceLocations("classpath:/META-INF/resources/")
+				.addResourceLocations("classpath:/static/page/").addResourceLocations("classpath:/static/templates/");
 //                .addResourceLocations("file:" + filePath);
-    }
+	}
 
 //    @Override
 //    protected void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
