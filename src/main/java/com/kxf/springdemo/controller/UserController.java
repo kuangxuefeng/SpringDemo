@@ -1,7 +1,5 @@
 package com.kxf.springdemo.controller;
 
-import java.util.UUID;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
@@ -84,7 +82,7 @@ public class UserController {
 	}
 
 	/**
-	 * 查询名称 http://localhost:8080/user/selectNameById?id=2
+	 * 查询名称
 	 * 
 	 * @param id
 	 * @return
@@ -102,7 +100,7 @@ public class UserController {
 	}
 
 	/**
-	 * 查询对象 http://localhost:8080/user/selectById?id=2
+	 * 查询对象
 	 */
 	@ApiOperation(value = "查询对象", notes = "查询对象")
 	@RequestMapping(value = "/selectById", method = RequestMethod.GET)
@@ -116,7 +114,7 @@ public class UserController {
 	}
 
 	/**
-	 * 增加对象 http://localhost:8080/user/add?name=tom
+	 * 增加对象
 	 */
 	@ApiOperation(value = "增加对象", notes = "增加对象")
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
