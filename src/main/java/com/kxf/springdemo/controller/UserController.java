@@ -25,7 +25,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("/user")
-@Api(tags = { "user操作" }, description = "/user")
+@Api(tags = { "用户操作" }, description = "/user")
 public class UserController {
 	@Autowired
 	private UserService userService;

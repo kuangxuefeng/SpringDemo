@@ -5,27 +5,19 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
-@Component
+import lombok.Data;
+
 //@Configuration
 //@EnableConfigurationProperties(MyAppInfoProperties.class)
 //@PropertySource("classpath:application.properties")
+@Data
+@Component
 @ConfigurationProperties(prefix = "spring.my-app-info")
 public class MyAppInfoProperties implements BeanClassLoaderAware, InitializingBean {
 	private String name;
 	private String version;
+	private String buildTimestamp;
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getVersion() {
-		return version;
-	}
-	public void setVersion(String version) {
-		this.version = version;
-	}
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
@@ -36,6 +28,5 @@ public class MyAppInfoProperties implements BeanClassLoaderAware, InitializingBe
 		// TODO Auto-generated method stub
 		
 	}
-	
 	
 }

@@ -20,10 +20,10 @@
 		<mybatis.version>1.3.2</mybatis.version>
 		<mybatis-generator.version>1.3.7</mybatis-generator.version>
 		<mybatis-dynamic-sql.version>1.1.4</mybatis-dynamic-sql.version>
-		<!--maven.build.timestamp保存了maven编译时间戳 -->
-		<timestamp>${maven.build.timestamp}</timestamp>
+		<!--maven.build.timestamp保存了maven编译时间戳,但是时区是UTC -->
+		<my-app-info.build-timestamp>${maven.build.timestamp}</my-app-info.build-timestamp>
 		<!--指定时间格式 -->
-		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss SSS</maven.build.timestamp.format>
 
 		<!--导入配置文件处理器，配置文件进行绑定就会有提示 -->
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -122,6 +122,13 @@
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
 		</dependency>
+
+		<!-- lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -129,6 +136,25 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<!-- lombok -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>timestamp-property</id>
+						<goals>
+							<goal>timestamp-property</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<name>build.local.timestamp</name>
+					<pattern>yyyy-MM-dd HH:mm:ss SSS</pattern>
+					<timeZone>GMT+8</timeZone>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
