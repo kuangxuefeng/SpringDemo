@@ -5,9 +5,9 @@
 <!-- debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
 <configuration scan="true" scanPeriod="10 seconds">
 
-	<!-- 读取application.properties属性spring.application.name来生成日志文件名 -->
+	<!-- 读取application.properties属性spring.my-app-info.name来生成日志文件名 -->
 	<springProperty scope="context" name="application.name"
-		source="spring.application.name" />
+		source="spring.my-app-info.name" />
 		
 	<contextName>logback-spring</contextName>
 
