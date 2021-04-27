@@ -34,7 +34,7 @@ public class TokenUtil {
         return user.getId() + TOKEN_SPLIT + tokenValue;
     }
     
-    public Integer getUserIdByToken(String token) throws Exception {
+    public Integer getUserIdByToken(String token, boolean needUpdate) throws Exception {
         if (!StringUtils.hasText(token)) {
         	throw new GlobalException(CodeMsg.TOKEN_INVALID);
         }
@@ -58,6 +58,13 @@ public class TokenUtil {
 		} catch (Exception e) {
 			throw new GlobalException(CodeMsg.TOKEN_INVALID);
 		}
+		if (needUpdate) {
+			redisUtil.expire(Consts.COOKIE_NAME_TOKEN + "::" + key, Consts.TOKEN_EXPIRE);
+		}
         return keyInt;
     }
+    
+    public void del(Integer userId) {
+    	redisUtil.del(Consts.COOKIE_NAME_TOKEN + "::" + userId);
+	}
 }

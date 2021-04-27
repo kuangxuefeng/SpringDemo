@@ -23,7 +23,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     	logger.info("AuthenticationInterceptor preHandle==>>");
         String token = request.getParameter(Consts.COOKIE_NAME_TOKEN);
-        Integer userId = tokenUtils.getUserIdByToken(token);
+        Integer userId = tokenUtils.getUserIdByToken(token, true);
         request.setAttribute(Consts.CURRENT_USER_ID, userId);
         logger.info("AuthenticationInterceptor preHandle==>>" + userId);
         return true;
