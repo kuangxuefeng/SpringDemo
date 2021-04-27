@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import com.alibaba.fastjson.JSON;
 import com.kxf.springdemo.entity.UserBean;
 import com.kxf.springdemo.exception.GlobalException;
 import com.kxf.springdemo.result.CodeMsg;

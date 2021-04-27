@@ -75,6 +75,7 @@ public class UserController {
 		if (userId != null) {
 			UserBean ub = userService.selectById(userId);
 			if (ub != null) {
+				ub.setPw(null);
 				return Result.success(ub);
 			}
 		}
