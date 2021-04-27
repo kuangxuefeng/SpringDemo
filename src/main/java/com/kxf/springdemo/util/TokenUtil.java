@@ -17,34 +17,47 @@ public class TokenUtil {
 	@Autowired
     private RedisUtil redisUtil;
 	
-    /**
-     * token过期时间，2天
-     * TOKEN_EXPIRE = 3600 * 24 * 2;
-     */
-    public static final int TOKEN_EXPIRE = 3000;
     
-    public void addCookie(HttpServletResponse response, String token, UserBean user) {
+    public static final String TOKEN_SPLIT = "#";
+    
+    public void addCookie(HttpServletResponse response, String token) {
         //将token写入cookie
         Cookie cookie = new Cookie(Consts.COOKIE_NAME_TOKEN, token);
-        cookie.setMaxAge(TOKEN_EXPIRE);
+        cookie.setMaxAge(Consts.TOKEN_EXPIRE);
         cookie.setPath("/");
         response.addCookie(cookie);
     }
     
-    public void setToken(String token, UserBean user) {
+    public String setToken(String tokenValue, UserBean user) {
         //将token存入到redis
-        redisUtil.set(Consts.COOKIE_NAME_TOKEN + "::" + token, JSON.toJSONString(user), TOKEN_EXPIRE);
+        redisUtil.set(Consts.COOKIE_NAME_TOKEN + "::" + user.getId(), tokenValue, Consts.TOKEN_EXPIRE);
+        return user.getId() + TOKEN_SPLIT + tokenValue;
     }
     
-    public UserBean getByToken(String token) throws Exception {
+    public Integer getUserIdByToken(String token) throws Exception {
         if (!StringUtils.hasText(token)) {
         	throw new GlobalException(CodeMsg.TOKEN_INVALID);
         }
-        UserBean user = JSON.parseObject(redisUtil.get(Consts.COOKIE_NAME_TOKEN + "::" + token), UserBean.class);
-        //重置有效期
-        if (user == null) {
-            throw new GlobalException(CodeMsg.USER_NOT_LOGIN);
-        }
-        return user;
+        int index = token.indexOf(TOKEN_SPLIT);
+        if (index<0 || index == token.length()-1) {
+        	throw new GlobalException(CodeMsg.TOKEN_INVALID);
+		}
+        String key = token.substring(0, index);
+        String tokenLoc = redisUtil.get(Consts.COOKIE_NAME_TOKEN + "::" + key);
+        if (!StringUtils.hasText(tokenLoc)) {
+        	throw new GlobalException(CodeMsg.TOKEN_INVALID);
+		}
+        
+        String tokenVal = token.substring(index+1);
+        if (!tokenLoc.equals(tokenVal)) {
+        	throw new GlobalException(CodeMsg.TOKEN_INVALID);
+		}
+        Integer keyInt;
+		try {
+			keyInt = Integer.parseInt(key);
+		} catch (Exception e) {
+			throw new GlobalException(CodeMsg.TOKEN_INVALID);
+		}
+        return keyInt;
     }
 }

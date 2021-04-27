@@ -23,9 +23,9 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
     	logger.info("AuthenticationInterceptor preHandle==>>");
         String token = request.getParameter(Consts.COOKIE_NAME_TOKEN);
-        UserBean user = tokenUtils.getByToken(token);
-        request.setAttribute(Consts.CURRENT_USER, user);
-        logger.info("AuthenticationInterceptor preHandle==>>" + user);
+        Integer userId = tokenUtils.getUserIdByToken(token);
+        request.setAttribute(Consts.CURRENT_USER_ID, userId);
+        logger.info("AuthenticationInterceptor preHandle==>>" + userId);
         return true;
     }
     @Override

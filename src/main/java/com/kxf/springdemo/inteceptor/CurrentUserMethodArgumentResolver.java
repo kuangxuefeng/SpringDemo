@@ -22,12 +22,12 @@ public class CurrentUserMethodArgumentResolver implements HandlerMethodArgumentR
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
     	logger.info("CurrentUserMethodArgumentResolver supportsParameter==>>");
-        return parameter.getParameterType().isAssignableFrom(UserBean.class);
+        return parameter.getParameterType().isAssignableFrom(Integer.class);
     }
  
     @Override
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) {
     	logger.info("CurrentUserMethodArgumentResolver resolveArgument==>>");
-        return  (UserBean) webRequest.getAttribute(Consts.CURRENT_USER, RequestAttributes.SCOPE_REQUEST);
+        return  (Integer) webRequest.getAttribute(Consts.CURRENT_USER_ID, RequestAttributes.SCOPE_REQUEST);
     }
 }

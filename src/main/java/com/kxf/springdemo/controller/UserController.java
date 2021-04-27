@@ -48,9 +48,9 @@ public class UserController {
 		UserBean ub = userService.selectByName(name);
 		if (ub!=null && StringUtils.hasText(pw) && pw.equals(ub.getPw())) {
 			//生成token
-	        String token = Consts.getUUID();
-	        tokenUtil.addCookie(response, token, ub);
-	        tokenUtil.setToken(token, ub);
+	        String tokenVal = Consts.getUUID();
+	        String token = tokenUtil.setToken(tokenVal, ub);
+	        tokenUtil.addCookie(response, token);
 			return Result.success(token);
 		}
         return Result.error(CodeMsg.USERNAME_NOT_EXIST);
@@ -61,10 +61,12 @@ public class UserController {
 	 */
 	@ApiOperation(value = "当前用户", notes = "当前用户")
     @RequestMapping(value = "/current", method=RequestMethod.GET)
-    public Result<UserBean> current(@ApiIgnore() UserBean ub, @ApiParam(value="token", defaultValue="") @RequestParam(value="token", defaultValue="") String token) {
-		if (ub!=null) {
-			ub.setPw(null);
-			return Result.success(ub);
+    public Result<UserBean> current(@ApiIgnore() Integer userId, @ApiParam(value="token", defaultValue="") @RequestParam(value="token", defaultValue="") String token) {
+		if (userId!=null) {
+			UserBean ub = userService.selectById(userId);
+			if (ub!=null) {
+				return Result.success(ub);
+			}
 		}
         return Result.error(CodeMsg.USER_NOT_LOGIN);
     }
