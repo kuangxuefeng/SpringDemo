@@ -20,8 +20,11 @@ public class SpringDemoApplication {
 		logger.error("开始启动服务===>>>");
 		ConfigurableApplicationContext context = SpringApplication.run(SpringDemoApplication.class, args);
 		String serverPort = context.getEnvironment().getProperty("server.port");
+		String contextPath = context.getEnvironment().getProperty("server.servlet.context-path");
 		String serverIp = getIp();
-		logger.error("服务启动完成===>>>started at " + serverIp + ":" + serverPort);
+		logger.error("服务启动完成===>>>");
+		logger.error("接口文档地址(内网)===>>>  " + "http://localhost:" + serverPort + contextPath + "/swagger-ui.html");
+		logger.error("接口文档地址(外网)===>>>  " + serverIp + ":" + serverPort + contextPath + "/swagger-ui.html");
 	}
 
 	public static String getIp() {
