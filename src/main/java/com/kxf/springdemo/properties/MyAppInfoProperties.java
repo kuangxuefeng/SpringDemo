@@ -17,6 +17,7 @@ public class MyAppInfoProperties implements BeanClassLoaderAware, InitializingBe
 	private String name;
 	private String version;
 	private String buildTimestamp;
+	private String logPathChild;//日志存放目录
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
