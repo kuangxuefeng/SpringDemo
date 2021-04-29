@@ -1,14 +1,14 @@
 # SpringDemo
-SpringDemo
-mybatis generator
+#### SpringDemo
+#### mybatis generator
 
-只输出错误信息到日志文件 
+### 只输出错误信息到日志文件 
 nohup java -jar yourProject.jar >/dev/null 2>log & 
 
-什么信息也不要 
+### 什么信息也不要 
 nohup java -jar yourProject.jar >/dev/null 2>&1 & 
 
-
+### 数据库
 
 CREATE SCHEMA `mysql_test` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ;
 
