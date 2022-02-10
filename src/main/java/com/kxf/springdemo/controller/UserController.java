@@ -57,7 +57,7 @@ public class UserController {
 	/**
 	 * 登录
 	 */
-	@ApiOperation(value = "用户登录", notes = "用户登录")
+	@ApiOperation(value = "用户退出登录", notes = "用户退出登录")
 	@RequestMapping(value = "/logOut", method = RequestMethod.POST)
 	public Result<String> logOut(@ApiIgnore() Integer userId,
 			@ApiParam(value = "token", defaultValue = "") @RequestParam(value = "token", defaultValue = "") String token) {
