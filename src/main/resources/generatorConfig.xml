@@ -26,10 +26,11 @@
 			targetPackage="com.kxf.springdemo.dao"
 			targetProject="SpringDemo/src/main/java" type="XMLMAPPER" />
 		<!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->
-		<table tableName="spring_table"
-			domainObjectName="SpringTableBean">
+		<table tableName="user_table"
+			domainObjectName="UserBean">
 			<columnOverride column="id" property="id" />
 			<columnOverride column="name" property="name" />
+			<columnOverride column="pw" property="pw" />
 			<columnOverride column="info" property="info" />
 		</table>
 	</context>
