@@ -28,7 +28,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	public ReqIdInterceptor reqIdInterceptor() {
 		return new ReqIdInterceptor();
 	}
-	
+
 	/**
 	 * 登录校验拦截器
 	 *
@@ -63,7 +63,10 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
 	@Override
 	protected void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(reqIdInterceptor());
-		registry.addInterceptor(loginRequiredInterceptor()).addPathPatterns("/**").excludePathPatterns("/user/login", "/server/**", "/test/**")
+		registry.addInterceptor(loginRequiredInterceptor())
+				.addPathPatterns("/**")
+				//拦截请求，判断是否有token
+				.excludePathPatterns("/user/login", "/server/**", "/test/**", "/file/**")
 				.excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**", "/error");
 		super.addInterceptors(registry);
 	}
