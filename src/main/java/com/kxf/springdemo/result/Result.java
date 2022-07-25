@@ -11,14 +11,14 @@ public class Result<T> {
      * 成功时候的调用
      */
     public static <T> Result<T> success() {
-        return new Result<T>(200, "成功");
+        return new Result<T>(CodeMsg.SUCCESS.getCode(), CodeMsg.SUCCESS.getMsg());
     }
 
     /**
      * 成功时候的调用
      */
     public static <T> Result<T> success(T data) {
-        return new Result<T>(200, "成功", data);
+        return new Result<T>(CodeMsg.SUCCESS.getCode(), CodeMsg.SUCCESS.getMsg(), data);
     }
 
     /**
