@@ -16,15 +16,15 @@
 		<!-- 生成模型的包名和位置 -->
 		<javaModelGenerator
 			targetPackage="com.kxf.springdemo.entity"
-			targetProject="SpringDemo/src/main/java" />
+			targetProject="${spring.my-app-info.name}/src/main/java" />
 		<!-- 生成的映射文件报名和位置 -->
 		<sqlMapGenerator
 			targetPackage="com.kxf.springdemo.mapper"
-			targetProject="SpringDemo/src/main/java" />
+			targetProject="${spring.my-app-info.name}/src/main/java" />
 		<!-- 生成DAO的包名和位置 -->
 		<javaClientGenerator
 			targetPackage="com.kxf.springdemo.dao"
-			targetProject="SpringDemo/src/main/java" type="XMLMAPPER" />
+			targetProject="${spring.my-app-info.name}/src/main/java" type="XMLMAPPER" />
 		<!-- 要生成的那些表(更改tableName 和domainObjectName 就可以了) -->
 		<table tableName="user_table"
 			domainObjectName="UserBean">
