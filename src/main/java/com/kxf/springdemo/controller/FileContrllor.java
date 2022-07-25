@@ -16,7 +16,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("/file")
-@Api(tags = { "文件操作" }, description = "/fileContrllor")
+@Api(tags = { "文件操作" }, description = "/file")
 public class FileContrllor {
 
 	/**
@@ -39,6 +39,6 @@ public class FileContrllor {
 			e.printStackTrace();
 			return Result.error(CodeMsg.SERVER_ERROR);
 		}
-		return Result.success();
+		return Result.success(savePath);
 	}
 }
