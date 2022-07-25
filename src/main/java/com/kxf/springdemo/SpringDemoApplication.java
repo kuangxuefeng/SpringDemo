@@ -27,12 +27,13 @@ public class SpringDemoApplication extends SpringBootServletInitializer {
 		String serverPort = context.getEnvironment().getProperty("server.port");
 		String contextPath = context.getEnvironment().getProperty("server.servlet.context-path");
 		String buildTimestamp = context.getEnvironment().getProperty("spring.my-app-info.build-timestamp");
-		basePath = context.getEnvironment().getProperty("user.dir") + context.getEnvironment().getProperty("spring.my-app-info.base-path");
+		String userDir = context.getEnvironment().getProperty("user.dir");
+		basePath = userDir + context.getEnvironment().getProperty("spring.my-app-info.base-path");
 		String serverIp = getIp();
 		logger.error("服务启动完成 buildTimestamp===>>>" + buildTimestamp);
 		logger.error("basePath===>>>" + basePath);
 		logger.error("spring.my-app-info.user-dir===>>>" + context.getEnvironment().getProperty("spring.my-app-info.user-dir"));
-		logger.error("日志存放目录===>>>" + context.getEnvironment().getProperty("user.dir") + context.getEnvironment().getProperty("spring.my-app-info.log-path-child"));
+		logger.error("日志存放目录===>>>" + userDir + context.getEnvironment().getProperty("spring.my-app-info.log-path-child"));
 		logger.error("接口文档地址(内网)===>>>  " + "http://localhost:" + serverPort + contextPath + "/swagger-ui.html");
 		logger.error("接口文档地址(外网)===>>>  " + serverIp + ":" + serverPort + contextPath + "/swagger-ui.html");
 	}
